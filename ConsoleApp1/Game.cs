@@ -16,9 +16,12 @@ namespace TextGame
             StartPage();
         }
 
+        /// <summary>
+        /// 1. 게임 시작 화면
+        /// </summary>
         public void StartPage()
         {
-            Console.WriteLine("\n\n스파르타 마을에 오신 여러분 환영합니다.\r\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\r\n\r\n1. 상태 보기\r\n2. 인벤토리\r\n3. 상점\r\n\r\n원하시는 행동을 입력해주세요.\r\n>>");
+            Console.WriteLine("\n\n스파르타 마을에 오신 여러분 환영합니다.\r\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\r\n\r\n[1] 상태 보기\r\n[2] 인벤토리\r\n[3] 상점\r\n\r\n원하시는 행동을 입력해주세요.\r\n>>");
 
             string command = Console.ReadLine();
             // 상태 보기
@@ -47,6 +50,9 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 2. 상태보기
+        /// </summary>
         public void StatusPage()
         {
             Console.WriteLine("\n\n상태 보기\r\n캐릭터의 정보가 표시됩니다.\r\n");
@@ -71,6 +77,9 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 3. 인벤토리
+        /// </summary>
         public void InventoryShowPage()
         {
             Console.WriteLine("\n\n인벤토리\r\n보유 중인 아이템을 관리할 수 있습니다.\r\n\n");
@@ -104,6 +113,9 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 3 - 1. 인벤토리 장착 관리 
+        /// </summary>
         public void InventoryEqipPage()
         {
             Console.WriteLine("\n\n인벤토리 - 장착 관리\r\n보유 중인 아이템을 관리할 수 있습니다.\r\n\n");
@@ -161,6 +173,9 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 4. 상점
+        /// </summary>
         public void StoreShowPage()
         {
             Console.WriteLine("\n\n상점\r\n필요한 아이템을 얻을 수 있는 상점입니다.\r\n\n");
@@ -196,7 +211,9 @@ namespace TextGame
             }
         }
 
-
+        /// <summary>
+        /// 4 - 1. 상점 아이템 구매
+        /// </summary>
         public void StoreBuyPage()
         {
             Console.WriteLine("\n\n상점 - 아이템 구매\r\n필요한 아이템을 얻을 수 있는 상점입니다.\r\n\n");
@@ -232,9 +249,10 @@ namespace TextGame
             // 아이템 개수 범위 안에 명령어 입력하기
             else if (commandInt > 0 && commandInt <= itemCount)
             {
+                Item selectedItem = store.storeItemList.itemList[commandInt - 1];
                 // 일치하는 아이템을 선택했다면 - 이미 구매한 아이템이라면
-                if (player.Gold >= store.storeItemList.itemList[commandInt - 1].price
-                    && store.storeItemList.itemList[commandInt - 1].isSold == true)
+                if (player.Gold >= selectedItem.price
+                    && selectedItem.isSold == true)
                 {
                     Console.Clear();
                     Console.WriteLine("*** 이미 구매한 아이템입니다. ***");
@@ -242,18 +260,18 @@ namespace TextGame
                     StoreBuyPage();
                 }
                 // 일치하는 아이템을 선택했다면 - 구매 가능한 아이템이라면
-                else if (player.Gold >= store.storeItemList.itemList[commandInt - 1].price 
-                    && store.storeItemList.itemList[commandInt - 1].isSold == false)
+                else if (player.Gold >= selectedItem.price 
+                    && selectedItem.isSold == false)
                 {
-                    player.Gold -= store.storeItemList.itemList[commandInt - 1].price;
-                    store.storeItemList.itemList[commandInt - 1].isSold = true;
+                    player.Gold -= selectedItem.price;
+                    selectedItem.isSold = true;
                     Console.Clear();
                     Console.WriteLine("*** 구매를 완료했습니다. ***");
                     Console.SetCursorPosition(0, 0);
                     StoreBuyPage();
                 }
                 // 골드 부족
-                else if (player.Gold < store.storeItemList.itemList[commandInt - 1].price)
+                else if (player.Gold < selectedItem.price)
                 {
                     Console.Clear();
                     Console.WriteLine("*** Gold가 부족합니다. ***");
@@ -268,7 +286,6 @@ namespace TextGame
                 StoreBuyPage();
             }
         }
-
 
         public void ShowWrongCommand()
         {

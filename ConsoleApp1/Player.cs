@@ -38,7 +38,7 @@ namespace TextGame
 
             foreach (Item item in playerItemList.itemList)
             {
-                Console.WriteLine($"- {index} {item.GetAllInfoInventory()}");
+                Console.WriteLine($"- [{index}] {item.GetAllInfoInventory()}");
                 index += 1;
             }
         }
@@ -122,7 +122,6 @@ namespace TextGame
         public int Level { get; set; }
         public string Name { get; set; }
         public Role Role { get; set; }
-            
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Hp { get; set; }

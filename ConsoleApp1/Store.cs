@@ -27,11 +27,8 @@ namespace TextGame
 
             foreach (Item item in storeItemList.itemList)
             {
-                if (item.price > 0)
-                {
-                    Console.WriteLine($"- [{index}] {item.GetAllInfoStore()}");
-                    index += 1;
-                }
+                Console.WriteLine($"- [{index}] {item.GetAllInfoStore()}");
+                index += 1;
             }
         }
 
