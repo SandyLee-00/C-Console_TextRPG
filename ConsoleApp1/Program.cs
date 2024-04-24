@@ -22,16 +22,22 @@ namespace TextGame
             player.Init(playerItemList);
             store.Init(storeItemList);
 
+            // 데이터 저장
             string dataPath = "../../../../Data/";
             JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
 
             string playerStatFileName = dataPath + "playerStat.json";
-            string jsonString = JsonSerializer.Serialize(player, options);
-            File.WriteAllText(playerStatFileName, jsonString);
 
-            game.Init(player, store);
+            /*string jsonString = JsonSerializer.Serialize(player, options);
+            File.WriteAllText(playerStatFileName, jsonString);*/
 
-            
+            // 데이터 로드
+            string jsonString2 = File.ReadAllText(playerStatFileName);
+            Player player2 = JsonSerializer.Deserialize<Player>(jsonString2);
+
+            game.Init(player2, store);
+
+            // game.Init(player, store);
 
         }
     }
