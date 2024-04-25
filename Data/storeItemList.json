@@ -69,7 +69,7 @@
       "AddMaxHpStat": 0,
       "Description": "\uC2A4\uD30C\uB974\uD0C0\uC758 \uC804\uC0AC\uB4E4\uC774 \uC0AC\uC6A9\uD588\uB2E4\uB294 \uC804\uC124\uC758 \uCC3D\uC785\uB2C8\uB2E4.",
       "Price": 0,
-      "IsSold": true,
+      "IsSold": false,
       "ItemType": 0
     }
   ]

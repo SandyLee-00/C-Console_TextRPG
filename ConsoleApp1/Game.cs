@@ -282,6 +282,7 @@ namespace TextGame
                 {
                     player.Gold -= selectedItem.Price;
                     selectedItem.IsSold = true;
+                    player.playerItemList.itemList.Add(selectedItem);
                     Console.Clear();
                     Console.WriteLine("*** 구매를 완료했습니다. ***");
                     Console.SetCursorPosition(0, 0);
