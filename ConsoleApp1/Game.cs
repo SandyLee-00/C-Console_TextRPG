@@ -132,6 +132,7 @@ namespace TextGame
 
         /// <summary>
         /// 3 - 1. 인벤토리 장착 관리 
+        /// 5. 장착 개선
         /// </summary>
         public void InventoryEqipPage()
         {

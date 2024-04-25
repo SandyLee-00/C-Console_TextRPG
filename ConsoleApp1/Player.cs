@@ -9,6 +9,10 @@ namespace TextGame
 {
     public class Player
     {
+        /// <summary>
+        /// 아이템 리스트 받아오기 / weapon, armor 장착
+        /// </summary>
+        /// <param name="playerItemList"></param>
         public void Init(ItemList playerItemList)
         {
             this.playerItemList = playerItemList;
@@ -29,6 +33,10 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// json 안 쓸 떄 처음 데이터 넣기
+        /// </summary>
+        /// <param name="playerItemList"></param>
         public void MakeDataFromCode(ItemList playerItemList)
         {
             this.Level = 1;
@@ -43,7 +51,9 @@ namespace TextGame
             this.playerItemList = playerItemList;
         }
 
-        // 인벤토리
+        /// <summary>
+        /// 인벤토리
+        /// </summary>
         public void ShowInventoryDefaultItemList()
         {
             foreach (Item item in playerItemList.itemList)
@@ -52,7 +62,9 @@ namespace TextGame
             }
         }
 
-        // 장착 관리 
+        /// <summary>
+        /// 장착 관리 
+        /// </summary>
         public void ShowInventoryEqipItemList()
         {
             int index = 1;
@@ -64,11 +76,18 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 플레이어 정보 출력
+        /// </summary>
         public void ShowPlayerInfo()
         {
             Console.WriteLine(GetAllPlayerInfo());
         }
 
+        /// <summary>
+        /// 플레이어 정보 string으로 반환
+        /// </summary>
+        /// <returns></returns>
         public string GetAllPlayerInfo()
         {
             string ret = "";
@@ -126,7 +145,9 @@ namespace TextGame
             return ret;
         }
 
-        // 장착 아이템의 스탯을 플레이어 스탯에 반영
+        /// <summary>
+        /// 장착 아이템의 스탯을 플레이어 스탯에 반영
+        /// </summary>
         public void SetPlayerStat()
         {
             foreach (Item item in playerItemList.itemList)
@@ -140,6 +161,10 @@ namespace TextGame
             }
         }
 
+        /// <summary>
+        /// 장착 개선 - - 각 타입별로 하나의 아이템만 장착가능 - ( 방어구 / 무기 ) - 방어구를 장착하면 기존 방어구가 있다면 해제하고 장착 - 무기를 장착하면 기존 무기가 있다면 해제하고 장착
+        /// </summary>
+        /// <param name="selectedItem"></param>
         public void ChangeEqippedItem(Item selectedItem)
         {
             ItemType selectedItemType = selectedItem.ItemType;
