@@ -26,7 +26,7 @@
     },
     {
       "Id": 3,
-      "IsEquipped": true,
+      "IsEquipped": false,
       "Name": "\uB0A1\uC740 \uAC80",
       "AddAttackStat": 2,
       "AddDefenseStat": 0,
