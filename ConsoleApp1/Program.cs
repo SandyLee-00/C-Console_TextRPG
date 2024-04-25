@@ -16,8 +16,8 @@ namespace TextGame
             ItemList playerItemList = new ItemList();
             ItemList storeItemList = new ItemList();
 
-            // 코드로 데이터 넣기
-            /*storeItemList.MakeStoreDataFromCode();
+            /*// 코드로 데이터 넣기
+            storeItemList.MakeStoreDataFromCode();
             playerItemList.MakePlayerDataFromCode();
             player.MakeDataFromCode(playerItemList);
 
@@ -27,8 +27,9 @@ namespace TextGame
             player = dataLoader.LoadDataFromJson<Player>("playerStat.json");
             playerItemList = dataLoader.LoadDataFromJson<ItemList>("playerItemList.json");
             storeItemList = dataLoader.LoadDataFromJson<ItemList>("storeItemList.json");
-            Store store = new Store(storeItemList);
 
+            player.Init(playerItemList);
+            Store store = new Store(storeItemList);
             // 게임 시작
             Game game = new Game(dataLoader, player, store);
             game.Init();

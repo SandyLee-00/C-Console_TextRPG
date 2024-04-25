@@ -9,14 +9,15 @@ namespace TextGame
     public class Item
     {
         public int Id { get; set; } = -1;
-        public bool Equipped { get; set; } = false;
+        public bool IsEquipped { get; set; } = false;
         public string Name { get; set; } = "무기";
         public int AddAttackStat { get; set; } = 0;
         public int AddDefenseStat { get; set; } = 0;
         public int AddMaxHpStat { get; set; } = 0;
         public string Description { get; set; } = "무기입니다.";
-        public int price { get; set; } = 0;
-        public bool isSold { get; set; } = false;
+        public int Price { get; set; } = 0;
+        public bool IsSold { get; set; } = false;
+        public ItemType ItemType { get; set; } = ItemType.Weapon;
 
         private string GetStatInfo()
         {
@@ -41,7 +42,7 @@ namespace TextGame
         public string GetAllInfoInventory()
         {
             string ret = "";
-            if (Equipped)
+            if (IsEquipped)
             {
                 ret += "[E]";
             }
@@ -56,13 +57,13 @@ namespace TextGame
 
         private string GetPriceInfo()
         {
-            if (isSold)
+            if (IsSold)
             {
                 return "구매완료";
             }
             else
             {
-                return $"{price} G";
+                return $"{Price} G";
             }
         }
 

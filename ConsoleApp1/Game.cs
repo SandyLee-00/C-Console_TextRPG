@@ -169,18 +169,64 @@ namespace TextGame
             else if (commandInt > 0 && commandInt <= itemCount)
             {
                 Console.Clear();
-                // 장착
-                if (player.playerItemList.itemList[commandInt - 1].Equipped == false)
+
+                Item selectedItem = player.playerItemList.itemList[commandInt - 1];
+                ItemType selectedItemType = selectedItem.ItemType;
+
+                // 선택한 아이템 Weapon
+                if (selectedItemType == ItemType.Weapon)
                 {
-                    player.playerItemList.itemList[commandInt - 1].Equipped = true;
-                    player.SetPlayerStat();
+                    // 장착하고 있는 아이템이 없다면
+                    if (player.EquippedWeapon == null)
+                    {
+                        player.EquippedWeapon = selectedItem;
+                        player.EquippedWeapon.IsEquipped = true;
+                        Console.WriteLine($"*** {player.EquippedWeapon.Name} 무기를 장착했습니다. ***");
+                    }
+                    // 기존에 장착하고 있던 아이템과 동일
+                    else if (player.EquippedWeapon == selectedItem)
+                    {
+                        player.EquippedWeapon.IsEquipped = false;
+                        player.EquippedWeapon = null;
+                        Console.WriteLine($"*** {selectedItem.Name} 무기 장착을 해제했습니다. ***");
+                    }
+                    // 다른 아이템 장착
+                    else
+                    {
+                        player.EquippedWeapon.IsEquipped = false;
+                        player.EquippedWeapon = selectedItem;
+                        player.EquippedWeapon.IsEquipped = true;
+                        Console.WriteLine($"*** {player.EquippedWeapon.Name} 무기를 장착했습니다. ***");
+                    }
                 }
-                // 장착 해제
-                else
+                // 선택한 아이템 Armor
+                else if (selectedItemType == ItemType.Armor)
                 {
-                    player.playerItemList.itemList[commandInt - 1].Equipped = false;
-                    player.SetPlayerStat();
+                    // 장착하고 있는 아이템이 없다면
+                    if (player.EquippedArmor == null)
+                    {
+                        player.EquippedArmor = selectedItem;
+                        player.EquippedArmor.IsEquipped = true;
+                        Console.WriteLine($"*** {player.EquippedArmor.Name} 방어구를 장착했습니다. ***");
+                    }
+                    // 기존에 장착하고 있던 아이템과 동일
+                    else if (player.EquippedArmor == selectedItem)
+                    {
+                        player.EquippedArmor.IsEquipped = false;
+                        player.EquippedArmor = null;
+                        Console.WriteLine($"*** {selectedItem.Name} 방어구 장착을 해제했습니다. ***");
+                    }
+                    // 다른 아이템 장착
+                    else
+                    {
+                        player.EquippedArmor.IsEquipped = false;
+                        player.EquippedArmor = selectedItem;
+                        player.EquippedArmor.IsEquipped = true;
+                        Console.WriteLine($"*** {player.EquippedArmor.Name} 방어구를 장착했습니다. ***");
+                    }
                 }
+
+                player.SetPlayerStat();
                 InventoryEqipPage();
             }
 
@@ -274,8 +320,8 @@ namespace TextGame
             {
                 Item selectedItem = store.storeItemList.itemList[commandInt - 1];
                 // 일치하는 아이템을 선택했다면 - 이미 구매한 아이템이라면
-                if (player.Gold >= selectedItem.price
-                    && selectedItem.isSold == true)
+                if (player.Gold >= selectedItem.Price
+                    && selectedItem.IsSold == true)
                 {
                     Console.Clear();
                     Console.WriteLine("*** 이미 구매한 아이템입니다. ***");
@@ -283,18 +329,18 @@ namespace TextGame
                     StoreBuyPage();
                 }
                 // 일치하는 아이템을 선택했다면 - 구매 가능한 아이템이라면
-                else if (player.Gold >= selectedItem.price 
-                    && selectedItem.isSold == false)
+                else if (player.Gold >= selectedItem.Price 
+                    && selectedItem.IsSold == false)
                 {
-                    player.Gold -= selectedItem.price;
-                    selectedItem.isSold = true;
+                    player.Gold -= selectedItem.Price;
+                    selectedItem.IsSold = true;
                     Console.Clear();
                     Console.WriteLine("*** 구매를 완료했습니다. ***");
                     Console.SetCursorPosition(0, 0);
                     StoreBuyPage();
                 }
                 // 골드 부족
-                else if (player.Gold < selectedItem.price)
+                else if (player.Gold < selectedItem.Price)
                 {
                     Console.Clear();
                     Console.WriteLine("*** Gold가 부족합니다. ***");

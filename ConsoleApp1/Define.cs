@@ -12,4 +12,10 @@ namespace TextGame
         Mage,
         Archer
     }
+
+    public enum ItemType
+    {
+        Weapon,
+        Armor
+    }
 }

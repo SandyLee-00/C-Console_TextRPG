@@ -11,6 +11,21 @@ namespace TextGame
         public void Init(ItemList playerItemList)
         {
             this.playerItemList = playerItemList;
+
+            foreach (Item item in playerItemList.itemList)
+            {
+                if (item.IsEquipped)
+                {
+                    if (item.ItemType == ItemType.Weapon)
+                    {
+                        EquippedWeapon = item;
+                    }
+                    else if (item.ItemType == ItemType.Armor)
+                    {
+                        EquippedArmor = item;
+                    }
+                }
+            }
         }
 
         public void MakeDataFromCode(ItemList playerItemList)
@@ -79,7 +94,7 @@ namespace TextGame
 
             foreach (Item item in playerItemList.itemList)
             {
-                if (item.Equipped)
+                if (item.IsEquipped)
                 {
                     addedAttack += item.AddAttackStat;
                     addedDefense += item.AddDefenseStat;
@@ -115,7 +130,7 @@ namespace TextGame
         {
             foreach (Item item in playerItemList.itemList)
             {
-                if (item.Equipped)
+                if (item.IsEquipped)
                 {
                     Attack += item.AddAttackStat;
                     Defense += item.AddDefenseStat;
@@ -132,6 +147,9 @@ namespace TextGame
         public int Hp { get; set; }
         public int MaxHp { get; set; }
         public int Gold { get; set; }
+
+        public Item? EquippedWeapon { get; set; }
+        public Item? EquippedArmor { get; set; }
 
         public ItemList playerItemList { get; set; }
     }
