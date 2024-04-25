@@ -25,7 +25,14 @@ namespace TextGame
         /// </summary>
         public void StartPage()
         {
-            Console.WriteLine("\n\n스파르타 마을에 오신 여러분 환영합니다.\r\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\r\n\r\n[1] 상태 보기\r\n[2] 인벤토리\r\n[3] 상점\r\n\r\n원하시는 행동을 입력해주세요.\r\n>>");
+            Console.WriteLine("\n\n스파르타 마을에 오신 여러분 환영합니다.\r\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\r\n\r\n");
+            
+            Console.WriteLine("[1] 상태 보기");
+            Console.WriteLine("[2] 인벤토리");
+            Console.WriteLine("[3] 상점");
+            Console.WriteLine("[5] 여관");
+
+            Console.WriteLine("\n원하시는 행동을 입력해주세요.\n>>");
 
             string command = Console.ReadLine();
             // 상태 보기
@@ -46,6 +53,12 @@ namespace TextGame
                 Console.Clear();
                 StoreShowPage();
             }
+            else if (command == "5")
+            {
+                Console.Clear();
+                HotelRestPage();
+            }
+
             // 잘못된 입력
             else
             {
@@ -294,6 +307,59 @@ namespace TextGame
             {
                 ShowWrongCommand();
                 StoreBuyPage();
+            }
+        }
+
+        /// <summary>
+        /// 7. 휴식기능 추가
+        /// </summary>
+        public void HotelRestPage()
+        {
+            dataLoader.SaveAllDataToJson(player, player.playerItemList, store.storeItemList);
+
+            Console.WriteLine("\n\n휴식하기");
+            const int restPrice = 500;
+            Console.WriteLine($"{restPrice} G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {player.Gold} G)\n");
+
+            Console.WriteLine("[1] 휴식하기");
+            Console.WriteLine("[0] 나가기\n");
+
+            Console.WriteLine("원하시는 행동을 입력해주세요.\r\n>>");
+
+            string command = Console.ReadLine();
+            // 휴식하기
+            if (command == "1")
+            {
+                // 보유 금액이 충분하다면
+                if (player.Gold >= restPrice)
+                {
+                    player.Hp = player.MaxHp;
+                    player.Gold -= restPrice;
+                    Console.Clear();
+                    Console.WriteLine("*** 휴식을 완료했습니다. ***");
+                    Console.SetCursorPosition(0, 0);
+                    HotelRestPage();
+                }
+                // 보유 금액이 부족하다면
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("*** Gold가 부족합니다. ***");
+                    Console.SetCursorPosition(0, 0);
+                    HotelRestPage();
+                }
+            }
+            // 게임 시작 화면
+            else if (command == "0")
+            {
+                Console.Clear();
+                StartPage();
+            }
+            // 잘못된 입력
+            else
+            {
+                ShowWrongCommand();
+                HotelRestPage();
             }
         }
 
