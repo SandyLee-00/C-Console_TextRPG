@@ -8,11 +8,15 @@ namespace TextGame
 {
     public class Game
     {
-        public void Init(Player player, Store store)
+        public Game(DataLoader dataLoader, Player player, Store store)
         {
+            this.dataLoader = dataLoader;
             this.player = player;
             this.store = store;
+        }
 
+        public void Init()
+        {
             StartPage();
         }
 
@@ -118,6 +122,8 @@ namespace TextGame
         /// </summary>
         public void InventoryEqipPage()
         {
+            dataLoader.SaveAllDataToJson(player, player.playerItemList, store.storeItemList);
+
             Console.WriteLine("\n\n인벤토리 - 장착 관리\r\n보유 중인 아이템을 관리할 수 있습니다.\r\n\n");
             Console.WriteLine("[아이템 목록]\n");
 
@@ -178,6 +184,8 @@ namespace TextGame
         /// </summary>
         public void StoreShowPage()
         {
+            dataLoader.SaveAllDataToJson(player, player.playerItemList, store.storeItemList);
+
             Console.WriteLine("\n\n상점\r\n필요한 아이템을 얻을 수 있는 상점입니다.\r\n\n");
             Console.WriteLine("[보유 골드]\n");
             Console.WriteLine($"{player.Gold} G\n");
@@ -216,6 +224,8 @@ namespace TextGame
         /// </summary>
         public void StoreBuyPage()
         {
+            dataLoader.SaveAllDataToJson(player, player.playerItemList, store.storeItemList);
+
             Console.WriteLine("\n\n상점 - 아이템 구매\r\n필요한 아이템을 얻을 수 있는 상점입니다.\r\n\n");
             Console.WriteLine("[보유 골드]\n");
             Console.WriteLine($"{player.Gold} G\n");
@@ -294,6 +304,7 @@ namespace TextGame
             Console.SetCursorPosition(0, 0);
         }
 
+        DataLoader dataLoader;
         Player player;
         Store store;
     }

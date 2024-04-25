@@ -10,36 +10,7 @@ namespace TextGame
     {
         public List<Item> itemList { get; set; } = new List<Item>();
 
-        public void InitPlayerItems()
-        {
-            Item item1 = new Item();
-            item1.Id = 1;
-            item1.Name = "무쇠갑옷";
-            item1.AddDefenseStat = 5;
-            item1.Equipped = true;
-            item1.Description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
-            itemList.Add(item1);
-
-            Item item2 = new Item();
-            item2.Id = 2;
-            item2.Name = "스파르타의 창";
-            item2.AddAttackStat = 7;
-            item2.Equipped = true;
-            item2.Description = "스파르타의 전사들이 사용했다는 전설의 창입니다.";
-            itemList.Add(item2);
-
-            Item item3 = new Item();
-            item3.Id = 3;
-            item3.Name = "낡은 검";
-            item3.AddAttackStat = 2;
-            item3.Description = "쉽게 볼 수 있는 낡은 검 입니다.";
-            itemList.Add(item3);
-            
-        }
-
-
-
-        public void InitStoreItems()
+        public void MakeStoreDataFromCode()
         {
             Item item1 = new Item();
             item1.Id = 1;
@@ -88,6 +59,32 @@ namespace TextGame
             item6.Description = "스파르타의 전사들이 사용했다는 전설의 창입니다.";
             item6.isSold = true;
             itemList.Add(item6);
+        }
+
+        public void MakePlayerDataFromCode()
+        {
+            Item item1 = new Item();
+            item1.Id = 1;
+            item1.Name = "무쇠갑옷";
+            item1.AddDefenseStat = 5;
+            item1.Equipped = true;
+            item1.Description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
+            itemList.Add(item1);
+
+            Item item2 = new Item();
+            item2.Id = 2;
+            item2.Name = "스파르타의 창";
+            item2.AddAttackStat = 7;
+            item2.Equipped = true;
+            item2.Description = "스파르타의 전사들이 사용했다는 전설의 창입니다.";
+            itemList.Add(item2);
+
+            Item item3 = new Item();
+            item3.Id = 3;
+            item3.Name = "낡은 검";
+            item3.AddAttackStat = 2;
+            item3.Description = "쉽게 볼 수 있는 낡은 검 입니다.";
+            itemList.Add(item3);
         }
     }
 }

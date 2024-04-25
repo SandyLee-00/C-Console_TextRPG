@@ -8,7 +8,7 @@ namespace TextGame
 {
     public class Store
     {
-        public void Init(ItemList storeItemList)
+        public Store(ItemList storeItemList)
         {
             this.storeItemList = storeItemList;
         }

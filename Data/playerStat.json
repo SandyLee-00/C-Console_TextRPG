@@ -1,12 +1,12 @@
 {
   "Level": 1,
-  "Name": "서영",
+  "Name": "\uC774\uC11C\uC601",
   "Role": 0,
   "Attack": 10,
   "Defense": 5,
-  "Hp": 100,
-  "MaxHp": 100,
-  "Gold": 15000,
+  "Hp": 50,
+  "MaxHp": 50,
+  "Gold": 10000,
   "playerItemList": {
     "itemList": [
       {

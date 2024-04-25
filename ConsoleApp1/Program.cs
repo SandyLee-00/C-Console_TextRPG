@@ -1,6 +1,7 @@
 ﻿using System;
 using TextGame;
 using System.Text.Json;
+using System.Reflection.PortableExecutable;
 
 namespace TextGame
 {
@@ -8,37 +9,29 @@ namespace TextGame
     {
         static void Main(string[] args)
         {
-            // 객체 생성
-            Game game = new Game();
+            // 게임 초기화
+            DataLoader dataLoader = new DataLoader();
+            
             Player player = new Player();
-            Store store = new Store();
             ItemList playerItemList = new ItemList();
             ItemList storeItemList = new ItemList();
 
-            // 데이터 초기화
-            playerItemList.InitPlayerItems();
-            storeItemList.InitStoreItems();
+            // 코드로 데이터 넣기
+            /*storeItemList.MakeStoreDataFromCode();
+            playerItemList.MakePlayerDataFromCode();
+            player.MakeDataFromCode(playerItemList);
 
-            player.Init(playerItemList);
-            store.Init(storeItemList);
+            dataLoader.SaveAllDataToJson(player, playerItemList, storeItemList);*/
 
-            // 데이터 저장
-            string dataPath = "../../../../Data/";
-            JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+            // json으로 데이터 넣기
+            player = dataLoader.LoadDataFromJson<Player>("playerStat.json");
+            playerItemList = dataLoader.LoadDataFromJson<ItemList>("playerItemList.json");
+            storeItemList = dataLoader.LoadDataFromJson<ItemList>("storeItemList.json");
+            Store store = new Store(storeItemList);
 
-            string playerStatFileName = dataPath + "playerStat.json";
-
-            /*string jsonString = JsonSerializer.Serialize(player, options);
-            File.WriteAllText(playerStatFileName, jsonString);*/
-
-            // 데이터 로드
-            string jsonString2 = File.ReadAllText(playerStatFileName);
-            Player player2 = JsonSerializer.Deserialize<Player>(jsonString2);
-
-            game.Init(player2, store);
-
-            // game.Init(player, store);
-
+            // 게임 시작
+            Game game = new Game(dataLoader, player, store);
+            game.Init();
         }
     }
 }

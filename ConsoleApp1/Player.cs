@@ -10,14 +10,19 @@ namespace TextGame
     {
         public void Init(ItemList playerItemList)
         {
-            Level = 1;
-            Name = "Chad";
-            Role = Role.Warrior;
-            Attack = 10;
-            Defense = 5;
-            Hp = 100;
-            MaxHp = 100;
-            Gold = 15000;
+            this.playerItemList = playerItemList;
+        }
+
+        public void MakeDataFromCode(ItemList playerItemList)
+        {
+            this.Level = 1;
+            this.Name = "이서영";
+            this.Role = Role.Warrior;
+            this.Attack = 10;
+            this.Defense = 5;
+            this.Hp = 50;
+            this.MaxHp = 50;
+            this.Gold = 10000;
 
             this.playerItemList = playerItemList;
         }
